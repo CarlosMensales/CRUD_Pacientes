@@ -1,19 +1,17 @@
 // models/db.js
-const mysql = require('mysql2');
-
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'escola'
+const { Sequelize } = require("sequelize");
+const sequelize = new Sequelize("hospital", "root", "", {
+  host: "localhost",
+  dialect: "mysql",
 });
 
-db.connect((err) => {
-  if (err) {
-    console.error('Erro ao conectar no MySQL: ', err);
-  } else {
-    console.log('Conectado ao MySQL...');
+async function connectDatabase() {
+  try {
+    await sequelize.authenticate();
+    console.log("Foiiiiii");
+  } catch (error) {
+    throw new Error("Bota isso no chatGPT:", error)
   }
-});
-
-module.exports = db;
+}
+connectDatabase();
+module.exports = sequelize;

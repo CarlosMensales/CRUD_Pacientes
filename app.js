@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 
-const alunosRouter = require('./routes/alunos'); 
+const pacientesRouter = require('./routes/pacientes'); 
 
 var app = express();
 
@@ -19,8 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/',alunosRouter);
-
+app.use('/',pacientesRouter);
 
 
 // catch 404 and forward to error handler
@@ -37,7 +36,7 @@ app.use((err, req, res, next) => {
   // Renderiza a página de erro
   res.status(err.status || 500);
   res.render('error', {
-    title: 'Erro',       // Aqui definimos o título da página de erro
+    title: 'Erro',       //a Aqui definimos o título da página de erro
     message: err.message,
     error: err
   });
